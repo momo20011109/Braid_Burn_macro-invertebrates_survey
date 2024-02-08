@@ -2,7 +2,7 @@ install.packages("vegan")
 install.packages("adespatial")
 library("vegan")
 library('ggplot2')
-invert<-read.csv("braidburn_biota.csv")
+invert<-read.csv("data/braidburn_biota.csv")
 #use the diversity function to calculate shannon diversity index of the invertebrates data
 invert.shan<-diversity(invert[,-1],index="shannon")
 invert.shan
@@ -62,8 +62,7 @@ autoplot(invert.nmds, geom="text")+theme_bw()
 
 #beta diversity
 library(adespatial)
-
-## Jaccard differences ##
+## Jaccard differences
 invert.div.jac <- beta.div.comp(invert[-1], coef = "J", quant = T)
 invert.div.jac$part
 
@@ -80,7 +79,7 @@ plot(local.invert.rich$LCBD,
      col = "orange",
      pch = 20,
      cex = 1.5)
-## Species contribution to Beta-diversity ##
+# Species contribution to Beta-diversity
 invert.scBD <- beta.div(invert[-1], method = "hellinger")
 invert.scBD
 
