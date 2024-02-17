@@ -2,6 +2,7 @@ install.packages("vegan")
 install.packages("adespatial")
 library("vegan")
 library('ggplot2')
+library("ggvegan")
 invert<-read.csv("data/braidburn_biota.csv")
 #use the diversity function to calculate shannon diversity index of the invertebrates data
 invert.shan<-diversity(invert[,-1],index="shannon")
@@ -46,7 +47,7 @@ plot(invert.accum, ci.type="polygon",
      xlab="Site")
 
 #gain the stress output of NMDS
-invert.nmds<-metaMDS(invert,
+invert.nmds<-metaMDS(invert[,-1],
                      k=2,     
                      distance="bray",
                      maxit=999,
@@ -58,7 +59,9 @@ invert.nmds
 
 #run a stress plot to evaluate the model
 stressplot(invert.nmds)
-autoplot(invert.nmds, geom="text")+theme_bw()
+autoplot(invert.nmds, geom = "text") +
+  theme_classic() +
+  theme(text = element_text(size = 10))
 
 #beta diversity
 library(adespatial)
